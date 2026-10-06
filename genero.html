@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ genero.nombre }} | Cine{% endblock %}
+
+{% block content %}
+<h1 class="mb-2">{{ genero.nombre }}</h1>
+<p class="text-muted">{{ genero.descripcion }}</p>
+
+{% if genero.peliculas %}
+<div class="row">
+    {% for p in genero.peliculas %}
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <img src="{% static p.imagen %}" class="card-img-top" alt="{{ p.nombre }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ p.nombre }}</h5>
+                <span class="badge {% if p.edad == '+18' %}bg-danger{% else %}bg-warning text-dark{% endif %}">
+                    Edad {{ p.edad }}
+                </span>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info">No hay películas en este género todavía.</div>
+{% endif %}
+
+<a href="{% url 'home:inicio' %}" class="btn btn-secondary">Volver al inicio</a>
+{% endblock %}
