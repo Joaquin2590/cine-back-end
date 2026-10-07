@@ -1,7 +1,12 @@
 # cine-back-end
 
+Sitio web de películas hecho con Django para la Evaluación Sumativa 2 de Back End.
+Muestra dos géneros (Acción y Terror) con sus películas, usando templates que heredan de `base.html` y componentes de Bootstrap.
+
+## Integrante
 
 # Joaquin Alejandro Rodriguez
-# joaquin.rodriguez22@inacapmail.cl
+# Correo institucional:** joaquin.rodriguez22@inacapmail.cl
 
-ttp://127.0.0.1:8000/
+ http://127.0.0.1:8000/ 
+
