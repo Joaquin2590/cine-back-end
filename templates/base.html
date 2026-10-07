@@ -14,7 +14,7 @@
 <body>
     <nav class="navbar navbar-expand-lg site-nav">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'home:inicio' %}">Cine Back End</a>
+            <a class="navbar-brand" href="{% url 'home:inicio' %}">Cine</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-label="Abrir menú">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -24,7 +24,13 @@
                         <a class="nav-link {% if request.resolver_match.url_name == 'inicio' %}active{% endif %}" href="{% url 'home:inicio' %}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'genero' %}active{% endif %}" href="{% url 'home:genero' %}">Películas</a>
+                        <a class="nav-link {% if request.resolver_match.kwargs.slug == 'accion' %}active{% endif %}" href="{% url 'home:genero' 'accion' %}">Acción</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.kwargs.slug == 'terror' %}active{% endif %}" href="{% url 'home:genero' 'terror' %}">Terror</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'peliculas' %}active{% endif %}" href="{% url 'home:peliculas' %}">Todas</a>
                     </li>
                 </ul>
             </div>
@@ -37,10 +43,7 @@
 
     <footer class="site-footer">
         <div class="container">
-            ¡Bienvenido a Cine Banck!
-
-    Tu próxima película empieza aquí. Explora, descubre y disfruta 
-    de tus historias favoritas. ¡Prepárate para vivir el cine!.
+            Joaquin Alejandro Rodriguez · joaquin.rodriguez22@inacapmail.cl
         </div>
     </footer>
 
