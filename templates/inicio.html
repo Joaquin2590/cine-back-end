@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inicio | Cine{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Elige tu película de hoy</h1>
+    <p>Acción para subir el pulso o terror para no dormir. Escoge un género y mira sus películas.</p>
+    <a href="{% url 'home:genero' %}" class="btn btn-cine">Ver todas las películas</a>
+</section>
+
+<div class="row g-4">
+    {% for g in generos %}
+    <div class="col-12 col-md-6">
+        <div class="genero-card shadow">
+            {% if g.peliculas %}
+            <img src="{% static g.peliculas.0.imagen %}" alt="Afiche de {{ g.peliculas.0.nombre }}">
+            {% endif %}
+            <div class="overlay">
+                <h2>{{ g.nombre }}</h2>
+                <p>{{ g.descripcion }}</p>
+                <a href="{% url 'home:genero' %}#{{ g.slug }}" class="btn btn-outline-cine">Ver películas de {{ g.nombre }}</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

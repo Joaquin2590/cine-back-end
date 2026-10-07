@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Películas | Cine{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Películas</h1>
+
+<div id="carouselPeliculas" class="carousel slide mb-5" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        {% for p in carrusel %}
+        <button type="button" data-bs-target="#carouselPeliculas" data-bs-slide-to="{{ forloop.counter0 }}"
+                {% if forloop.first %}class="active" aria-current="true"{% endif %}
+                aria-label="{{ p.nombre }}"></button>
+        {% endfor %}
+    </div>
+
+    <div class="carousel-inner rounded-3 shadow">
+        {% for p in carrusel %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <img src="{% static p.imagen %}" class="d-block w-100" alt="{{ p.nombre }}">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>{{ p.nombre }}</h5>
+                <p>{{ p.genero }} · Edad {{ p.edad }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselPeliculas" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselPeliculas" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+    </button>
+</div>
+
+{% for g in generos %}
+<section id="{{ g.slug }}" class="seccion-genero">
+    <div class="titulo">
+        <h2>{{ g.nombre }}</h2>
+        <p class="text-muted mb-0">{{ g.descripcion }}</p>
+    </div>
+
+    {% if g.peliculas %}
+    <div class="row g-4">
+        {% for p in g.peliculas %}
+        <div class="col-6 col-md-4 col-lg-3 pelicula">
+            <div class="poster">
+                <img src="{% static p.imagen %}" alt="Afiche de {{ p.nombre }}">
+                <span class="edad {% if p.edad == '+18' %}adulto{% endif %}">{{ p.edad }}</span>
+            </div>
+            <h3>{{ p.nombre }}</h3>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info">Todavía no hay películas en este género.</div>
+    {% endif %}
+</section>
+{% endfor %}
+
+<a href="{% url 'home:inicio' %}" class="btn btn-outline-cine">Volver al inicio</a>
+{% endblock %}
