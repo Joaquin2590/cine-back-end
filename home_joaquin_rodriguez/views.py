@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 
 # Data que se envía a los templates desde la vista
@@ -27,8 +28,15 @@ def inicio(request):
     return render(request, 'inicio.html', {'generos': GENEROS})
 
 
-def genero(request):
-    # Una sola página con todos los géneros y sus películas
-    # Lista plana con todas las películas para el carousel
+def genero(request, slug):
+    # Página de un solo género con sus películas
+    for g in GENEROS:
+        if g['slug'] == slug:
+            return render(request, 'genero.html', {'genero': g})
+    raise Http404('Género no encontrado')
+
+
+def peliculas(request):
+    # Página con todos los géneros y un carousel con todas las películas
     carrusel = [dict(p, genero=g['nombre']) for g in GENEROS for p in g['peliculas']]
-    return render(request, 'genero.html', {'generos': GENEROS, 'carrusel': carrusel})
+    return render(request, 'peliculas.html', {'generos': GENEROS, 'carrusel': carrusel})

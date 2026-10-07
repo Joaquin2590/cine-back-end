@@ -5,5 +5,6 @@ app_name = 'home'   # namespace
 
 urlpatterns = [
     path('', views.inicio, name='inicio'),
-    path('generos/', views.genero, name='genero'),
+    path('genero/<slug:slug>/', views.genero, name='genero'),
+    path('peliculas/', views.peliculas, name='peliculas'),
 ]
